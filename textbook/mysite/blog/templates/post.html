@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2><a href="/blog/{{post.id}}">{{ post.title }}</a></h2>
+
+<h2><a href="/blog/{{post.id}}/alt">Alternate Resources</a></h2>
+
+
+<div class"post_meta">
+    on {{ post.created }}
+</div>
+
+<div class"post_body">
+    {{ post.body|safe|linebreaks }}
+</div>
+
+<div class"tags">
+    {% for post in post.tags.all%}
+    <a hfef="/blog/tag/{{tag}}">{{tag}}</a>
+    {% if not forloop.last %}, {% endif %}
+    {% endfor %}
+</div>
+
+<!--<h2><a href="/blog/{{post.id}}">Comment on The Course</a></h2>-->
+
+<form action="/blog/" method="post">
+	{% csrf_token %}
+    <label for="your_name">Add a comment </label>
+    <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+    <input type="submit" value="OK">
+</form>
+{% endblock %}
